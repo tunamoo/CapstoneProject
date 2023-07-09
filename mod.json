@@ -1,0 +1,53 @@
+{
+  "O_Sugars": {
+    "O-Glycosylation HexNAc": 203,
+    "O-Glycosylation Hex1HexNAc1NeuAc2": 948,
+    "O-Glycosylation Hex1HexNAc1NeuAc1": 657,
+    "O-Glycosylation dHexHex(2)HexA": 64
+  },
+  "N_Sugars":  {
+    "N-Glycosylation Man5": 1217,
+    "N-Glycosylation Man6": 1379,
+    "N-Glycosylation G0F - GlcNAc": 1242,
+    "N-Glycosylation G0F": 1445,
+    "N-Glycosylation G0 - GlcNAc": 1096,
+    "N-Glycosylation G0": 1299,
+    "N-Glycosylation G1": 1461,
+    "N-Glycosylation G1F": 1607,
+    "N-Glycosylation G1F + Neu5Ac": 1899,
+    "N-Glycosylation G2F": 1769,
+    "N-Glycosylation G2F + Neu5Ac": 2060,
+    "N-Glycosylation G2F + 2Neu5Ac": 2352,
+    "N-Glycosylation G0F, G0F": 2889,
+    "N-Glycosylation G0F, G1F": 3051,
+    "N-Glycosylation G1F, G1F": 3213,
+    "N-Glycosylation G1F, G2F": 3375,
+    "N-Glycosylation dHex(1)Hex(6)HexNAc(5)NeuAc(3)": 3006,
+    "N-Glycosylation dHex(1)Hex(6)HexNAc(5)NeuAc(2)": 2715,
+    "N-Glycosylation dHex(2)Hex(4)HexNAc(5)": 1957,
+    "N-Glycosylation dHex(1)Hex(4)HexNAc(5)": 1811,
+    "N-Glycosylation dHex(1)Hex(5)HexNAc(3)": 1565
+  },
+  "Other_Mods": {
+    "Dehydration": -18,
+    "Cysteinylation": 119,
+    "Phosphorylation": 80,
+    "Acetylation": 42,
+    "Methylation": 14,
+    "De-amidation": 1,
+    "De-amidation-2": 2
+  },
+  "Special_Mods": {
+    "Disulfide_Bonds0": 0,
+    "Disulfide_Bonds1": -2,
+    "Disulfide_Bonds2": -4,
+    "Disulfide_Bonds3": -6,
+    "Disulfide_Bonds4": -8,
+    "Disulfide_Bonds5": -10,
+    "Disulfide_Bonds6": -12,
+    "Disulfide_Bonds7": -14,
+    "Disulfide_Bonds8": -16,
+    "Disulfide_Bonds9": -18,
+    "Disulfide_Bonds10": -20
+  }
+}
