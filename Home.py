@@ -137,7 +137,7 @@ with tab2:
         with col7:
             o_sugar_mass = st.text_input(label="O Sugar Mass (If present, seperate it by comma) e.g 1000, 2000")
         with col8:
-            mod_mass = st.text_input(label="Modification Mass (If present, seperate it by comma) e.g 1000, 2000")
+            mod_mass = st.text_input(label="Modified Mass (If present, seperate it by comma) e.g 1000, 2000")
 
         with col9:
             error_margin = st.text_input(
