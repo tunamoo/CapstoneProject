@@ -77,7 +77,7 @@ def highlight_sequence(seq, target_aas):
             result_str += aa
 
     st.markdown(result_str, unsafe_allow_html=True)
-    for target_aa, value in target_aas_count_dict.items():
+    for target_aa, value in sorted(target_aas_count_dict.items()):
         new_string = f"Count of Amino Acid Sequence {target_aa}: " + str(value)
         st.markdown(new_string, unsafe_allow_html=True)
 
