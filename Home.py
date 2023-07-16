@@ -6,12 +6,12 @@ import pandas as pd
 import json
 
 
-# Declare Chemical Functions On Top
+# Declare chemical functions on top
 def calc_mol_weight_prot_param(seq):
     pp = ProteinAnalysis(str(seq))
     return pp.molecular_weight()
 
-
+# Logic for the prediciton of cleavage sites
 def predict_cleavage_sites(seq_list, amino_sequence, default_mass, margin):
     # Difference is the default mass
     if margin == "" or margin is None:
@@ -36,13 +36,13 @@ def predict_cleavage_sites(seq_list, amino_sequence, default_mass, margin):
     saved_dict = dict(sorted(saved_dict.items(), key=lambda item: item[1][1]))
     return saved_dict
 
-
+# Mathematical formula for prediction cleavage sites based on molecular weight difference
 def calc_mass_diff(diff, disul_bonds, nq, ck, water_value, n_sugar=None, o_sugar=None, mod=None):
     mass_diff = diff + 2 * int(disul_bonds) - nq + ck - water_value - float(n_sugar if n_sugar else 0) - \
                 float(o_sugar if o_sugar else 0) - float(mod if mod else 0)
     return mass_diff
 
-
+# Get values of PTMs stored in a dictionary
 def get_values_from_dict(d, val):
     if val is None:
         return None
@@ -53,7 +53,7 @@ def get_values_from_dict(d, val):
         except ValueError:
             return None
 
-
+# Creating rows on Streamlit GUI
 def create_row(inputs, diff, mass_diff, pot_cleav_sites, keys):
     new_row = {"Inputs": inputs, "Initial Mass Difference": abs(diff), "Modified Mass Difference": abs(mass_diff),
                "Cleavage Sites": keys}
@@ -76,10 +76,15 @@ def highlight_sequence(seq, target_aas):
         else:
             result_str += aa
 
+# Display the count of the number of amino acids that the user wants to find
     st.markdown(result_str, unsafe_allow_html=True)
     for target_aa, value in sorted(target_aas_count_dict.items()):
         new_string = f"Count of Amino Acid Sequence {target_aa}: " + str(value)
         st.markdown(new_string, unsafe_allow_html=True)
+
+# Display the count of the entire length of user's input amino acid sequence
+    total_length = len(seq)
+    st.markdown(f'Total length of Amino Acid Sequence: {total_length}', unsafe_allow_html=True)
 
 
 water = 18
@@ -94,6 +99,7 @@ st.markdown('<hr class=hr-1></hr>', unsafe_allow_html=True)
 
 tab1, tab2 = st.tabs(["Highlighting and Molecular Weight", "Cleavage Site Predictor"])
 
+# Tab 1 - amino acid highlighting function
 with tab1:
     amino_seq = st.text_input(label="Enter Amino Sequence")
     amino_short = st_tags(label="Enter the amino acid sequence to search (e.g, 'C', 'G', 'N')", maxtags=6)
@@ -118,6 +124,7 @@ with tab1:
             molecular_weight = "{:.2f}".format(molecular_weight_mw) + " Da"
             st.markdown(molecular_weight, unsafe_allow_html=True)
 
+# Tab 2 - cleavage site predictor (work in progress)
 with tab2:
     with st.expander("Minimise"):
         amino_seq_input = st.text_input(label="Amino Acid Sequence")
