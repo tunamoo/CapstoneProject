@@ -11,6 +11,7 @@ def calc_mol_weight_prot_param(seq):
     pp = ProteinAnalysis(str(seq))
     return pp.molecular_weight()
 
+
 # Logic for the prediciton of cleavage sites
 def predict_cleavage_sites(seq_list, amino_sequence, default_mass, margin):
     # Difference is the default mass
@@ -36,11 +37,13 @@ def predict_cleavage_sites(seq_list, amino_sequence, default_mass, margin):
     saved_dict = dict(sorted(saved_dict.items(), key=lambda item: item[1][1]))
     return saved_dict
 
+
 # Mathematical formula for prediction cleavage sites based on molecular weight difference
 def calc_mass_diff(diff, disul_bonds, nq, ck, water_value, n_sugar=None, o_sugar=None, mod=None):
     mass_diff = diff + 2 * int(disul_bonds) - nq + ck - water_value - float(n_sugar if n_sugar else 0) - \
                 float(o_sugar if o_sugar else 0) - float(mod if mod else 0)
     return mass_diff
+
 
 # Get values of PTMs stored in a dictionary
 def get_values_from_dict(d, val):
@@ -52,6 +55,7 @@ def get_values_from_dict(d, val):
             return list(d.keys())[position]
         except ValueError:
             return None
+
 
 # Creating rows on Streamlit GUI
 def create_row(inputs, diff, mass_diff, pot_cleav_sites, keys):
@@ -76,18 +80,35 @@ def highlight_sequence(seq, target_aas):
         else:
             result_str += aa
 
-# Display the count of the number of amino acids that the user wants to find
+    # Display the count of the number of amino acids that the user wants to find
     st.markdown(result_str, unsafe_allow_html=True)
     for target_aa, value in sorted(target_aas_count_dict.items()):
         new_string = f"Count of Amino Acid Sequence {target_aa}: " + str(value)
         st.markdown(new_string, unsafe_allow_html=True)
 
-# Display the count of the entire length of user's input amino acid sequence
+    # Display the count of the entire length of user's input amino acid sequence
     total_length = len(seq)
     st.markdown(f'Total length of Amino Acid Sequence: {total_length}', unsafe_allow_html=True)
 
 
+# Constant
 water = 18
+st.session_state['error_check'] = 0
+st.session_state['error_message'] = ''
+
+
+# Error Checking
+
+# Error Checking for Highlighting Sequence
+def check_input_highlight(a_seq, a_st):
+    st.session_state['error_message'] = ''
+    if a_seq.isdigit():
+        st.session_state['error_check'] = 1
+        st.session_state['error_message'] += 'Amino Sequence should only be strings \n'
+    if all(item.isdigit() for item in a_st):
+        st.session_state['error_check'] = 1
+        st.session_state['error_message'] += 'Amino Acid Sequence search filter should only be strings'
+
 
 # Define GUI Script
 st.set_page_config(layout="wide")
@@ -111,18 +132,29 @@ with tab1:
     # GQPKANPTVTLFPPSSEELQANKATLVCLISDFYPGAVTVAWKADGSPVKAGVETTKPSKQSNNKYAASSYLSLTPEQWKSHRSYSCQVTHEGSTVEKTVAPTECSHHHHHH
 
     if analyse:
+        check_input_highlight(amino_seq, amino_short)
         col1, _, col2 = st.columns([1, 0.5, 1])
-        analyzed_seq = ProteinAnalysis(amino_seq)
-        molecular_weight_mw = analyzed_seq.molecular_weight()
+        if st.session_state['error_check'] == 1:
+            with col1:
+                st.subheader("Output Results")
+                error_list = st.session_state['error_message'].split("\n")
+                for i in error_list:
+                    st.error(i)
+            with col2:
+                st.subheader("Molecular Weight")
+                st.markdown("Nan", unsafe_allow_html=True)
+        else:
+            analyzed_seq = ProteinAnalysis(amino_seq)
+            molecular_weight_mw = analyzed_seq.molecular_weight()
 
-        with col1:
-            st.subheader("Output Results")
-            highlight_sequence(amino_seq, amino_short)
+            with col1:
+                st.subheader("Output Results")
+                highlight_sequence(amino_seq, amino_short)
 
-        with col2:
-            st.subheader("Molecular Weight")
-            molecular_weight = "{:.2f}".format(molecular_weight_mw) + " Da"
-            st.markdown(molecular_weight, unsafe_allow_html=True)
+            with col2:
+                st.subheader("Molecular Weight")
+                molecular_weight = "{:.2f}".format(molecular_weight_mw) + " Da"
+                st.markdown(molecular_weight, unsafe_allow_html=True)
 
 # Tab 2 - cleavage site predictor (work in progress)
 with tab2:
