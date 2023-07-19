@@ -69,6 +69,9 @@ def highlight_sequence(seq, target_aas):
     target_aas_count_dict = {}
     colors = ["yellow", "cyan", "magenta", "lime", "orange", "pink"]
     result_str = ""
+    with open('mod.json') as s:
+        high_dict = json.load(s)['Highlights']
+
     for aa in seq:
         if aa in target_aas:
             color_index = target_aas.index(aa)
@@ -83,7 +86,7 @@ def highlight_sequence(seq, target_aas):
     # Display the count of the number of amino acids that the user wants to find
     st.markdown(result_str, unsafe_allow_html=True)
     for target_aa, value in sorted(target_aas_count_dict.items()):
-        new_string = f"Count of Amino Acid Sequence {target_aa}: " + str(value)
+        new_string = f"Count of Amino Acid Sequence {target_aa} {high_dict[target_aa]}: " + str(value)
         st.markdown(new_string, unsafe_allow_html=True)
 
     # Display the count of the entire length of user's input amino acid sequence

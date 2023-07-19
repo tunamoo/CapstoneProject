@@ -49,5 +49,29 @@
     "Disulfide_Bonds8": -16,
     "Disulfide_Bonds9": -18,
     "Disulfide_Bonds10": -20
+  },
+  "Highlights": {
+    "A": "(Alanine)",
+    "C": "(Cysteine)",
+    "D": "(Aspartic Acid)",
+    "E": "(Glutamic Acid)",
+    "F": "(Phenylalanine)",
+    "G": "(Glycine)",
+    "H": "(Histidine)",
+    "I": "(Isoleucine)",
+    "K": "(Lysine)",
+    "L": "(Leucine)",
+    "M": "(Methionine)",
+    "N": "(Asparagine)",
+    "O": "(Pyrrolysine)",
+    "P": "(Proline)",
+    "Q": "(Glutamine)",
+    "R": "(Arginine)",
+    "S": "(Serine)",
+    "T": "(Threonine)",
+    "U": "(Selenocysteine)",
+    "V": "(Valine)",
+    "W": "(Tryptophan)",
+    "Y": "(Tyrosine)"
   }
 }
