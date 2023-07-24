@@ -125,7 +125,7 @@ tab1, tab2 = st.tabs(["Amino Acid Finder & Highlighter", "Cleavage Site Predicto
 
 # Tab 1 - amino acid highlighting function
 with tab1:
-    amino_seq = st.text_input(label="Enter target sequence")
+    amino_seq = st.text_input(label="Enter target amino acid sequence")
     amino_short = st_tags(label="Enter the amino acid(s) to search (e.g, 'C', 'G', 'N')", maxtags=6)
     analyse = st.button(label="Analyze Sequence")
 
