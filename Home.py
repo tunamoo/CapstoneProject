@@ -110,7 +110,7 @@ def check_input_highlight(a_seq, a_st):
         st.session_state['error_message'] += 'Full amino acid sequences should only consist of alphabets. \n'
     if all(item.isdigit() for item in a_st):
         st.session_state['error_check'] = 1
-        st.session_state['error_message'] += 'Amino acid search filter should only be alphabets. \n'
+        st.session_state['error_message'] += 'Amino acid search filter should only be alphabetical inputs. \n'
 
 
 # Define GUI Script
@@ -153,7 +153,7 @@ with tab1:
 
             with col2:
                 st.subheader("Molecular Weight")
-                molecular_weight = "{:.2f}".format(molecular_weight_mw) + " Daltons (Da)"
+                molecular_weight = "{:.2f}".format(molecular_weight_mw) + " Dalton (Da)"
                 st.markdown(molecular_weight, unsafe_allow_html=True)
 
 # Tab 2 - cleavage site predictor (work in progress)
