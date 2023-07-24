@@ -67,7 +67,7 @@ def create_row(inputs, diff, mass_diff, pot_cleav_sites, keys):
 # Declare GUI Functions
 def highlight_sequence(seq, target_aas):
     target_aas_count_dict = {}
-    colors = ["yellow", "cyan", "magenta", "lime", "orange", "pink"]
+    colors = ["yellow", "cyan", "navajowhite", "lime", "orange", "pink"]
     result_str = ""
     with open('mod.json') as s:
         high_dict = json.load(s)['Highlights']
@@ -86,12 +86,12 @@ def highlight_sequence(seq, target_aas):
     # Display the count of the number of amino acids that the user wants to find
     st.markdown(result_str, unsafe_allow_html=True)
     for target_aa, value in sorted(target_aas_count_dict.items()):
-        new_string = f"Count of Amino Acid Sequence {target_aa} {high_dict[target_aa]}: " + str(value)
+        new_string = f"Count of amino acid {target_aa} {high_dict[target_aa]}: " + str(value)
         st.markdown(new_string, unsafe_allow_html=True)
 
     # Display the count of the entire length of user's input amino acid sequence
     total_length = len(seq)
-    st.markdown(f'Total length of Amino Acid Sequence: {total_length}', unsafe_allow_html=True)
+    st.markdown(f'Total length of amino acid sequence: {total_length}', unsafe_allow_html=True)
 
 
 # Constant
@@ -107,10 +107,10 @@ def check_input_highlight(a_seq, a_st):
     st.session_state['error_message'] = ''
     if a_seq.isdigit():
         st.session_state['error_check'] = 1
-        st.session_state['error_message'] += 'Amino Sequence should only be strings \n'
+        st.session_state['error_message'] += 'Full amino acid sequences should only consist of alphabets. \n'
     if all(item.isdigit() for item in a_st):
         st.session_state['error_check'] = 1
-        st.session_state['error_message'] += 'Amino Acid Sequence search filter should only be strings'
+        st.session_state['error_message'] += 'Amino acid search filter should only be alphabets. \n'
 
 
 # Define GUI Script
@@ -121,18 +121,15 @@ with open("styles/styles.css") as source_des:
 st.title("Amino Acid Sequence Analyzer for QC Department")
 st.markdown('<hr class=hr-1></hr>', unsafe_allow_html=True)
 
-tab1, tab2 = st.tabs(["Highlighting and Molecular Weight", "Cleavage Site Predictor"])
+tab1, tab2 = st.tabs(["Amino Acid Finder & Highlighter", "Cleavage Site Predictor"])
 
 # Tab 1 - amino acid highlighting function
 with tab1:
-    amino_seq = st.text_input(label="Enter Amino Sequence")
-    amino_short = st_tags(label="Enter the amino acid sequence to search (e.g, 'C', 'G', 'N')", maxtags=6)
+    amino_seq = st.text_input(label="Enter target sequence")
+    amino_short = st_tags(label="Enter the amino acid(s) to search (e.g, 'C', 'G', 'N')", maxtags=6)
     analyse = st.button(label="Analyze Sequence")
 
     st.markdown('<hr class=hr-1></hr>', unsafe_allow_html=True)
-
-    # Amino Sequence
-    # GQPKANPTVTLFPPSSEELQANKATLVCLISDFYPGAVTVAWKADGSPVKAGVETTKPSKQSNNKYAASSYLSLTPEQWKSHRSYSCQVTHEGSTVEKTVAPTECSHHHHHH
 
     if analyse:
         check_input_highlight(amino_seq, amino_short)
@@ -156,7 +153,7 @@ with tab1:
 
             with col2:
                 st.subheader("Molecular Weight")
-                molecular_weight = "{:.2f}".format(molecular_weight_mw) + " Da"
+                molecular_weight = "{:.2f}".format(molecular_weight_mw) + " Daltons (Da)"
                 st.markdown(molecular_weight, unsafe_allow_html=True)
 
 # Tab 2 - cleavage site predictor (work in progress)
