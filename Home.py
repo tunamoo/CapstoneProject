@@ -113,9 +113,9 @@ def check_input_highlight(a_seq, a_st):
         st.session_state['error_check'] = 1
         # Added a check because due to separators of \n problems
         if st.session_state["error_message"]:
-            st.session_state['error_message'] += '\nAmino acid sequence search filter should only be alphabets'
+            st.session_state['error_message'] += '\nAmino acid sequence search filter should only be alphabets.'
         else:
-            st.session_state['error_message'] += 'Amino Acid Sequence search filter should only be alphabets'
+            st.session_state['error_message'] += 'Amino Acid Sequence search filter should only be alphabets.'
 
 
 # Define GUI Script
