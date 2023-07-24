@@ -110,7 +110,7 @@ def check_input_highlight(a_seq, a_st):
         st.session_state['error_message'] += 'Full amino acid sequences should only consist of alphabets. \n'
     if all(item.isdigit() for item in a_st):
         st.session_state['error_check'] = 1
-        st.session_state['error_message'] += 'Amino acid search filter should only be alphabetical inputs. \n'
+        st.session_state['error_message'] += 'Amino acid search filter should only be alphabetical inputs.'
 
 
 # Define GUI Script
