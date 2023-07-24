@@ -142,7 +142,7 @@ with tab1:
                     st.error(i)
             with col2:
                 st.subheader("Molecular Weight")
-                st.markdown("Nan", unsafe_allow_html=True)
+                st.markdown("NIL", unsafe_allow_html=True)
         else:
             analyzed_seq = ProteinAnalysis(amino_seq)
             molecular_weight_mw = analyzed_seq.molecular_weight()
