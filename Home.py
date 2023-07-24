@@ -105,12 +105,17 @@ st.session_state['error_message'] = ''
 # Error Checking for Highlighting Sequence
 def check_input_highlight(a_seq, a_st):
     st.session_state['error_message'] = ''
-    if a_seq.isdigit():
+    # Added a new condition such that if the string is empty, it'll also trigger this
+    if a_seq.isdigit() or a_seq == "":
         st.session_state['error_check'] = 1
-        st.session_state['error_message'] += 'Full amino acid sequences should only consist of alphabets. \n'
+        st.session_state['error_message'] += 'Full amino acid sequence should only be alphabets and cannot be empty.'
     if all(item.isdigit() for item in a_st):
         st.session_state['error_check'] = 1
-        st.session_state['error_message'] += 'Amino acid search filter should only be alphabetical inputs.'
+        # Added a check because due to separators of \n problems
+        if st.session_state["error_message"]:
+            st.session_state['error_message'] += '\nAmino acid sequence search filter should only be alphabets'
+        else:
+            st.session_state['error_message'] += 'Amino Acid Sequence search filter should only be alphabets'
 
 
 # Define GUI Script
